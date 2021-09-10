@@ -1,37 +1,21 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
-  <title>Bhadoo Drive Index</title>
-  
-  <meta name="robots" content="noindex" />
-  <link rel="icon" href="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.17-alpha.7/images/favicon.ico">
-  <script>
-    window.drive_names = JSON.parse('["Drive One","Drive One"]');
-    window.MODEL = JSON.parse('{"root_type":1}');
-    window.current_drive_order = 0;
-    window.UI = JSON.parse('{"theme":"slate","version":"2.0.18","logo_image":true,"logo_height":"","logo_width":"100px","favicon":"https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.17-alpha.7/images/favicon.ico","logo_link_name":"https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.3/bhadoo-cloud-logo-white.svg","fixed_header":true,"header_padding":"60","fixed_footer":false,"header_style_class":"navbar-dark bg-primary","footer_style_class":"bg-primary","css_a_tag_color":"white","css_p_tag_color":"white","folder_text_color":"white","loading_spinner_class":"text-light","search_button_class":"btn-outline-success","path_nav_alert_class":"alert alert-primary","file_view_alert_class":"alert alert-danger","file_count_alert_class":"alert alert-secondary","contact_link":"https://telegram.dog/Telegram","copyright_year":"2050","company_name":"gdi.js.org","company_link":"https://telegram.dog/Telegram","credit":true,"display_size":true,"display_time":false,"display_download":true,"disable_player":false,"custom_srt_lang":"","disable_video_download":false,"second_domain_for_dl":false,"downloaddomain":"https://testing.fetchgoogleapi.workers.dev","poster":"https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/poster.jpg","audioposter":"https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/music.jpg","jsdelivr_cdn_src":"https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index","render_head_md":true,"render_readme_md":true,"display_drive_link":false,"plyr_io_version":"3.6.4","plyr_io_video_resolution":"16:9","unauthorized_owner_link":"https://telegram.dog/Telegram","unauthorized_owner_email":"abuse@telegram.org","arc_code":"jfoY2h19"}');
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.6.4/plyr.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.0.0/dist/slate/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-  <style>
-  a {
-      color: white;
-  }
-  p {
-      color: white;
-  }
-  </style>
-  <script src="https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.18/js/app.min.js"></script>
-  <script src="/update.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/mozilla/pdf.js@gh-pages/build/pdf.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-</head>
 <body>
-</body>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
-  <script src="https://cdn.plyr.io/3.6.4/plyr.polyfilled.js"></script>
-</html>
+
+<p>Count numbers: <output id="result"></output></p>
+<button onclick="startWorker()">Start Worker</button> 
+<button onclick="stopWorker()">Stop Worker</button>
+
+<p><strong>Note:</strong> Internet Explorer 9 and earlier versions do not support Web Workers.</p>
+
+<script>
+var w;
+
+function startWorker() {
+  if(typeof(Worker) !== "undefined") {
+    if(typeof(w) == "undefined") {
+      w = new Worker("demo_workers.js");
+    }
+    w.onmessage = function(event) {
+      document.getElementById("result").innerHTML = event.data;
+    };
